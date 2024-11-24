@@ -1,0 +1,7 @@
+#flight_details{
+    display: inline-block;
+    margin-left: 0;
+    border: 2px solid black;
+    background-color: wheat;
+    text-align: left;
+}
