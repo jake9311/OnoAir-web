@@ -15,21 +15,21 @@
         <div id="main">
             <h2 id="manageFlights">New Destination</h2>
            <div id="newFlight"><strong>New Destination</strong> 
-            <form><div >
+            <form method="get" id="addingDestinationForm" ><div >
               <label for="DestinationCode">Destination code:</label>
-              <input type="text" id="DestinationCode" required> 
+              <input type="text" id="DestinationCode" name="destinationCode" required> 
                </div>
                <div >
               <label for="DestinationName">Destination Name:  </label>
               <input  type="text" id="DestinationName" required> 
                </div>
               <div >
-              <label for="AirportName">Airort Name:  </label>
+              <label for="AirportName">Airport Name:  </label>
                   <input  type="text" id="AirportName" required> 
               </div>
               <div >
-              <label for="AitportUrl">Aitport url:  </label>
-                  <input  type="url" id="AitportUrl" required> 
+              <label for="AirportUrl">Aitport url:  </label>
+                  <input  type="url" id="AirportUrl" required> 
                 </div>
                <div >
                  <label for="ImageUrl">Image url:  </label>
@@ -50,5 +50,6 @@
             </div>
           </footer>
       </div>
+      <script src="addingADestination.js" ></script>
 </body>
 </html>

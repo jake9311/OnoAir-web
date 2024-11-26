@@ -15,7 +15,7 @@
         <div id="main">
             <h2 id="AddingFlight">Adding a flight</h2>
             <div id="newFlight"><strong>New Flight</strong> 
-                <form ><div>
+                <form method="get" id="addingFlightForm" ><div>
                     <label for="flightNo">Flight No.: </label>
                     <input type="text" id="flightNo" placeholder="Flight No." required > 
                 </div>
@@ -61,12 +61,13 @@
                 </div>
             </div>
             <div> <button type="submit" id="addFlight">Save</div>
-            </div></div></form>
+            </form></div></div>
             <footer>
                 <div id="footer_frame">
                   <div id="text">?</div>  
                 </div>
               </footer>
           </div>
+          <script src="addingAFlight.js" ></script>
 </body>
 </html>
