@@ -23,18 +23,15 @@ sfgvds<br>fvsfvsdfdafdfas<br>fsdvsdfdafa<br>fgsdgsd
 
             <div >
               <label for="NoOfPassengers">Nomber of passengers :</label>
-              <input type="text" id="Name"> 
+              <input type="number" id="NoOfPassengers" min="1" max="5" required> 
+              
+              <button id="Done">Done</button>
                </div>
-            <div>passenger 1:<br>
-              <div >
-                <label for="Name">Name:</label>
-                <input type="text" id="NoOfPassengers"> 
-                 </div>
-                 <div >
-                  <label for="PassportID">Passport ID:</label>
-                  <input type="text" id="PassportID"> 
-                   </div>
-                   <div> <button type="button" id="bookFlightBtn">Save</div>
+               <form id="passengerForm">
+                <div id="passengersDetails"> </div>
+                <button type="submit">save</button>
+
+               </form>
                    </div>
             </div>
 
@@ -46,6 +43,6 @@ sfgvds<br>fvsfvsdfdafdfas<br>fsdvsdfdafa<br>fgsdgsd
           </div>
         </footer>
     </div>
-
+<script src="flightBkooking.js"></script>
 </body>
 </html>

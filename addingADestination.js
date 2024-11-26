@@ -2,7 +2,6 @@
 let form = document.getElementById("addingDestinationForm");
 
 form.addEventListener("submit", (event) => {
-    event.preventDefault();
 
     let destinationCode = document.getElementById("DestinationCode").value.trim();
     let destinationName = document.getElementById("DestinationName").value.trim();
@@ -17,22 +16,25 @@ form.addEventListener("submit", (event) => {
     const urlRegex = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
 
     if (!codeRegex.test(destinationCode)  ) {
+        event.preventDefault();
         alert("Destination Code must be exactly 3 letters.");
         error = true;
     }
 
     if (!nameRegex.test(destinationName) || !nameRegex.test(airportName)) {
+        event.preventDefault();
         alert("Destination Name and Airport Name must contain only letters.");
         error = true;
     }
 
     if (!urlRegex.test(airportUrl) || !urlRegex.test(imageUrl)) {
+        event.preventDefault();
         alert("Airport URL and Image URL must be valid URLs.");
         error = true;
     }
 
     if (!error) {
-        alert("Details have been received!");
+        alert("Details has received!");
     }
 });
 
