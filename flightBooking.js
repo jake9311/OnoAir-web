@@ -9,7 +9,7 @@ for (let i=1; i<=  passengersNum; i++){
     passengerField.innerHTML=`
     <h4>Passenger ${i} </h4>
 
-    <lable for="Name{i}"> Name:</lable>  
+    <lable for="Name${i}"> Name:</lable>  
     <input type="text" id="Name${i}" name="Name${i}" required>
 
     <label for="PassportID${i}">Passport ID:</label>
@@ -47,3 +47,43 @@ form.addEventListener("submit", (event)=>{
     }
  
 })
+
+function getFlightDetails() {
+    const flightDetailsString = localStorage.getItem("selectedFlight");
+    if (!flightDetailsString) {
+        return null;
+    }
+
+    const [flightNo, origin, destination, boardingDate, boardingTime, arrivalDate, arrivalTime, numberOfSeats] =
+        flightDetailsString.split(",");
+
+    return {
+        flightNo,
+        origin,
+        destination,
+        boardingDate,
+        boardingTime,
+        arrivalDate,
+        arrivalTime,
+        numberOfSeats
+    };
+}
+
+function displayFlightDetails() {
+    const flightDetailsDiv = document.getElementById("flight_details");
+    const flight = getFlightDetails();
+
+    if (flight) {
+        const flightDetailsHTML = `
+            <p><strong>Origin:</strong> ${flight.origin} Boarding: ${flight.boardingDate} ${flight.boardingTime} </p>
+            <p><strong>Destination:</strong> ${flight.destination} Landing: ${flight.arrivalDate} ${flight.arrivalTime} </p>
+        `;
+        flightDetailsDiv.innerHTML = flightDetailsHTML;
+    } else {
+        flightDetailsDiv.innerHTML = "<p>No flight details available.</p>";
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", displayFlightDetails);
+

@@ -6,66 +6,46 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="manageFlight.css">
+    <link rel="stylesheet" href="manageFlights.css">
     <title>Manage Flights</title>
 </head>
 <body>
     <div id="frame">
-        <header><h1 ><a href="mainScreen.html">OnoAir</a></h1></header>
+        <header>
+            <h1><a href="index.html">OnoAir</a></h1>
+        </header>
         <div id="main">
             <h2 id="manageFlights">Manage Flights</h2>
-            <table bgcolor="black" width="100%">
-            <tr bgcolor="gray">
-                <th width="100">
-                    Flight No.
-                </th>
-                <th width="100">
-                    Origin
-                </th>
-                <th width="100">
-                    Destination
-                </th>
-                <th width="100">
-                    Boarding Date
-                </th>
-                <th width="100">
-                    Boarding Time
-                </th>
-                <th width="100">
-                    Arrival Date
-                </th>
-                <th width="100">
-                    Arrival Time
-                </th><th width="100">
-                    No. of seats
-                </th>
-            </tr>
 
-            <tr bgcolor="lightgray">
-                <td id="flightNo"> W61283</td>
-                <td id="Origin">Tel-Aviv</td>
-                <td id="Destination">Krakow</td>
-                <td id="Boarding Date">5.12.24</td>
-                <td id="Boarding Time">5.12.24</td>
-                <td id="Arrival Date">5.12.24</td>
-                <td id="Arrival Time">5.12.24</td>
-                <td id="No. of seats">2</td>
-            </tr>
+            <table id="flightsTable" bgcolor="black" width="100%">
+                <thead>
+                    <tr bgcolor="gray">
+                        <th width="100">Flight No.</th>
+                        <th width="100">Origin</th>
+                        <th width="100">Destination</th>
+                        <th width="100">Boarding Date</th>
+                        <th width="100">Boarding Time</th>
+                        <th width="100">Arrival Date</th>
+                        <th width="100">Arrival Time</th>
+                        <th width="100">No. of seats</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
 
-        </table>
-        
-         <div> <button type="button" id="addSome">    
-            <a href="addingAFlight.html">Add a Flight</a></div>
-
-
-
+            <button type="button" id="addSome">
+                <a href="addingAFlight.html">Add a Flight</a>
+            </button>
         </div>
-        <footer>
-          <div id="footer_frame">
-            <div id="text">?</div>  
-          </div>
-        </footer>
     </div>
-    
+    <footer>
+        <div id="footer_frame">
+            <div id="text"><a href="help.html">?</a></div>  
+        </div>
+    </footer>
+
+    <script type="module" src="manageFlights.js"></script>
 </body>
 </html>

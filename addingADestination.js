@@ -32,7 +32,7 @@ event.preventDefault();
         alert("Airport URL and Image URL must be valid URLs.");
         error = true;
     }
-    console.log(localStorage.getItem("destinations"));
+    
     if (!error) {
         alert("Details has received!");
         const destination= `${destinationCode}, ${destinationName}, ${airportName}, ${airportUrl},${imageUrl}`;
@@ -40,7 +40,7 @@ event.preventDefault();
         let destinations=localStorage.getItem("destinations") ||"";
         destinations += `\n${destination}`;
         localStorage.setItem("destinations", destinations);
-       //  localStorage.removeItem("destinations");
+         //localStorage.removeItem("destinations");
           window.location.href= "manageDestination.html";
     }
    

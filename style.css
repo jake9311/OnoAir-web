@@ -1,21 +1,9 @@
-/*header{
-    text-align: left;
-    border: 2px solid black;
-    padding: 2px 0;
-    margin: 30px ;
-    background-color: greenyellow;
-}*/
-/*a{
-    display: block;
-    color: black;
-    font-size: large;
-    margin: 50px;
-    text-align: center;
-    text-decoration: underline;
-    font-weight: bold;
-}*/
+
 a:hover{
     color: blue;
+}
+a{
+    text-decoration: none;
 }
 #page{ 
     color: black;
@@ -37,14 +25,7 @@ a:hover{
     width: 100%;
     border: 3px solid black;
 }
-/*
-#footer_frame{
-    text-align: right;
-    border: 2px solid black;
-    padding: 5px 0;
-    margin: 20px ;
-    background-color: greenyellow;
-}*/
+
 #text{
     text-align: right;
     border: 2px solid black;
@@ -65,4 +46,23 @@ body{
     padding: 5px 50px;
     margin: 20px;
     
+}
+
+a{
+    text-decoration: none;
+}
+table{
+    text-align: center;
+}
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    background-color: antiquewhite;
+}
+th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    background-color: burlywood;
 }
