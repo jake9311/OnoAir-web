@@ -67,6 +67,9 @@ function loadBookings() {
     });
 }
 
+
 document.addEventListener("DOMContentLoaded", displayBookings);
 document.addEventListener("DOMContentLoaded", loadBookings);
+
+
 //localStorage.clear();

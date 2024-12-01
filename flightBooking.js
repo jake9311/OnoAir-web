@@ -1,4 +1,6 @@
+
 document.getElementById("Done").addEventListener('click', function(){
+   
 const passengersNum= document.getElementById("NoOfPassengers").value;
 const passengersDetails= document.getElementById("passengersDetails");
 
@@ -26,7 +28,7 @@ form.addEventListener("submit", (event)=>{
     let error=false;
     const nameRegex = /^[A-Za-z\s]+$/;
     const passportRegex= /^[A-Za-z0-9]{6,9}$/;
-
+    
     for (let i=1; i<=passengersNum;i++){
         const name=document.getElementById(`Name${i}`).value.trim();
         const passportID=document.getElementById(`PassportID${i}`).value.trim();
@@ -41,11 +43,15 @@ form.addEventListener("submit", (event)=>{
             alert(`Passenger ${i}: Passport ID must be 6-9 alphanumeric characters.`)
             error=true;
         }
-        if (!error){
+       
+          }
+          if (!error){
+            event.preventDefault();
             alert(`Deatails has received `)
+            const myFlight=getFlightDetails();
+            localStorage.setItem("bookings", myFlight);
+            window.location.href="manageBookings.html"
         }
-    }
- 
 })
 
 function getFlightDetails() {
@@ -85,5 +91,7 @@ function displayFlightDetails() {
 }
 
 
-document.addEventListener("DOMContentLoaded", displayFlightDetails);
 
+
+document.addEventListener("DOMContentLoaded", displayFlightDetails);
+//localStorage.clear();
