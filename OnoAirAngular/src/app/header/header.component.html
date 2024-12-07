@@ -1,2 +1,12 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu_icon"><mat-icon>menu</mat-icon> </button>
+    <span >OnoAir</span>
+</mat-toolbar>
 
-<p>header works!</p>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>Admin- Manage Flights</button>
+    <button mat-menu-item>Admin- Manage Destinations</button>
+    <button mat-menu-item>User- Book a Flight</button>
+    <button mat-menu-item>User- Manage Bookings</button>
+  </mat-menu>
+
