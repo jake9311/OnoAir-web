@@ -1,12 +1,31 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu_icon"><mat-icon>menu</mat-icon> </button>
+    <button mat-icon-button [matMenuTriggerFor]="mainMenu" class="menu_icon"><mat-icon>menu</mat-icon> </button>
     <span >OnoAir</span>
 </mat-toolbar>
 
-<mat-menu #menu="matMenu">
-    <button mat-menu-item>Admin- Manage Flights</button>
-    <button mat-menu-item>Admin- Manage Destinations</button>
-    <button mat-menu-item>User- Book a Flight</button>
-    <button mat-menu-item>User- Manage Bookings</button>
-  </mat-menu>
+<mat-menu #mainMenu="matMenu">
+    <button mat-menu-item [mat-menu-trigger-for]="adminMenu">
+        <!-- <mat-icon>arrow_right</mat-icon> -->
+        Admin
+    </button>
+
+    <button mat-menu-item [mat-menu-trigger-for]="userMenu">
+        User
+        <!-- <mat-icon>arrow_right</mat-icon> -->
+    </button>
+</mat-menu>
+
+<mat-menu #adminMenu="matMenu">
+    <button mat-menu-item>Manage Flights</button>
+    <button mat-menu-item>Manage Destinations</button>
+</mat-menu>
+
+<mat-menu #userMenu="matMenu">
+    <button mat-menu-item>Book a Flight</button>
+    <button mat-menu-item>Manage Bookings</button>
+</mat-menu>
+
+
+
+
 

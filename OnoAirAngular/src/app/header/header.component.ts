@@ -10,7 +10,5 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  onMenuClick(): void {
-   alert("Menu Clicked");
-  }
+ 
 }
