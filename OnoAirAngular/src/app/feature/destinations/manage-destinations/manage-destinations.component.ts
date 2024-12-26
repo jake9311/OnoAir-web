@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { DestinationsService } from '../../../destinations.service';
-import { Destination } from '../dsetinations-cons/destination-cons';
+import { DestinationsService } from '../destinations.service';
+import { Destination } from '../dsetinations-model/destination-model';
 @Component({
   selector: 'app-manage-destinations',
   imports: [],

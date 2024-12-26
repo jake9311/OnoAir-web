@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Destination } from './feature/destinations/dsetinations-cons/destination-cons';
+import { Destination } from './dsetinations-model/destination-model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,10 @@ constructor() { }
   }
   get (destinationCode: string): Destination| undefined{
     return this.Destinations.find(d => d.destinationCode === destinationCode);
+  }
+
+  getImgUrl(name: string): string | undefined {
+    return this.Destinations.find(d => d.name=== name)?.airportImg;
   }
   
 

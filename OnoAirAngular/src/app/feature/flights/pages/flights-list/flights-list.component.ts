@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {FlightsService} from '../../../flights.service';
-import { Flight } from '../flight-cons/flight-cons';
+import {FlightsService} from '../../flights.service';
+import { Flight } from '../../flight-model/flight-model';
 import { OnInit } from '@angular/core';
 
 @Component({
@@ -11,7 +11,8 @@ import { OnInit } from '@angular/core';
 })
 export class FlightsListComponent implements OnInit {
   flights!: Flight[];
-  //constructor(private flightService: FlightsService){}
+  displayedColumns: string[] = ['flightNumber', 'origin', 'destination', 'action'];
+  
   constructor(private flightService: FlightsService ) { }
   ngOnInit() :void{
     this.flights = this.flightService.list();

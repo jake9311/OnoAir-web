@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Flight } from './feature/flights/flight-cons/flight-cons';
+import { Flight } from './flight-model/flight-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlightsService {
    private flights=[
-     new Flight("W61283", "Tel-Aviv", "Krakow", "01.12.24", "12:50", "01.12.24", "20:00", 2),
+     new Flight("W61283", "Tel-Aviv", "Berlin", "01.12.24", "12:50", "01.12.24", "20:00", 2),
      new Flight("AA1234", "New York", "Los Angeles", "05.12.24", "08:00", "05.12.24", "12:30", 150),
      new Flight("BA5678", "London", "Paris", "10.12.24", "14:00", "10.12.24", "15:30", 75),
      new Flight("EK9876", "Dubai", "Tokyo", "20.12.24", "22:00", "21.12.24", "10:00", 300),

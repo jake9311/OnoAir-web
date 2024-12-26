@@ -5,9 +5,10 @@ import { FooterComponent } from "./shared/footer/footer.component";
 import { HomepageComponent } from "./feature/homePage/homepage/homepage.component";
 
 
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, HomepageComponent, RouterModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, HomepageComponent, RouterModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
