@@ -28,10 +28,9 @@ export class HomepageComponent implements OnInit {
               ) { }
 
  ngOnInit(): void {
-  const flights = this.flightsService.list().slice(0, 3);
+  const flights = this.flightsService.list().sort((a,b)=> new Date(a.boardingDate).getTime() - new Date(b.boardingDate).getTime()).slice(0,3);
   this.lastMinuteFlights = flights.map((flight) =>({flight, imgUrl:this.destinationsService.getImgUrl(flight.destination)}));
   this.dataSource.data = this.flightsService.list();
-  console.log(this.dataSource);
  }
 
  applyFilter(event: Event): void {
