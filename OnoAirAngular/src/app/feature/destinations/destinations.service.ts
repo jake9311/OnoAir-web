@@ -28,6 +28,8 @@ constructor() { }
   getImgUrl(name: string): string | undefined {
     return this.Destinations.find(d => d.name=== name)?.airportImg;
   }
-  
+  getImgUrlbyDestinationAirportName(airportName: string): string | undefined {
+    return this.Destinations.find(d => d.airportName=== airportName)?.airportImg;
+  }
 
 }
