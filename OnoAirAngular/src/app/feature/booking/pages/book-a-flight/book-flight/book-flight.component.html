@@ -1,0 +1,20 @@
+<div class="flight-details" *ngIf="flight">
+    <h1>Book a Flight</h1>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ flight.origin }} → {{ flight.destination }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Flight number:</strong> {{ flight.flightNumber }}</p>
+        <p><strong>Origin:</strong> {{ flight.origin }}{{' '}}<strong>Boarding date:</strong> {{ flight.boardingDate }}{{" "}}{{flight.boardingTime}}</p>
+        <p><strong>Destination:</strong> {{ flight.destination }}{{' '}}<strong>Arrivak date:</strong> {{ flight.arrivalDate }}{{" "}}{{flight.arrivalTime}}</p>
+        
+         
+            <p> <strong>Number of seats:</strong> {{ flight.numOfSeats }}</p>
+         
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+ 
+  
