@@ -1,1 +1,19 @@
-<p>single-flight works!</p>
+<div *ngIf="flight">
+    <h1>Flight Details</h1>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ flight.origin }} → {{ flight.destination }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Flight number:</strong> {{ flight.flightNumber }}</p>
+        <p><strong>Origin:</strong> {{ flight.origin }}</p>
+        <p><strong>Destination:</strong> {{ flight.destination }}</p>
+        <p><strong>Boarding date:</strong> {{ flight.boardingDate }}{{" "}}{{flight.boardingTime}}</p>
+         <p><strong>Arrivak date:</strong> {{ flight.arrivalDate }}{{" "}}{{flight.arrivalTime}}</p> 
+         <p><strong>Number of seats:</strong> {{ flight.numOfSeats }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+ 
+  

@@ -1,8 +1,21 @@
-table {
-    width: 100%;
-  }
-  
-  button {
-    font-size: 14px;
-  }
-  
+h1,h2{
+  text-align: center;
+  font-size: 40px;   
+  font-style: oblique;
+ }
+ table {
+     width: 100%;
+   }
+   
+   .mat-form-field {
+     width: 100%;
+     margin-bottom: 20px;
+   }
+   
+   button {
+     color: black;
+   }
+   .list-filter{
+    text-align: center;
+    margin-top: 20px;
+   }

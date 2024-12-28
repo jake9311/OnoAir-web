@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-homepage',
   imports: [ FlightsListComponent,CommonModule,MatCardModule,MatFormFieldModule,MatTableModule,MatInputModule],
@@ -24,8 +25,8 @@ export class HomepageComponent implements OnInit {
 
 
  constructor(private flightsService: FlightsService,
-             private destinationsService: DestinationsService 
-              ) { }
+             private destinationsService: DestinationsService , private router: Router  ) { }
+              
 
  ngOnInit(): void {
   const flights = this.flightsService.list().sort((a,b)=> new Date(a.boardingDate).getTime() - new Date(b.boardingDate).getTime()).slice(0,3);
@@ -33,13 +34,18 @@ export class HomepageComponent implements OnInit {
   this.dataSource.data = this.flightsService.list();
  }
 
- applyFilter(event: Event): void {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
+//  applyFilter(event: Event): void {
+//   const filterValue = (event.target as HTMLInputElement).value;
+//   this.dataSource.filter = filterValue.trim().toLowerCase();
+// }
 
-bookFlight(flight: any): void {
- 
-  //צריך להמשיך
+//selectedFlight: Flight | null = null;
+// bookFlight(flight: Flight): void {
+//   console.log('Navigating to flight:', flight.flightNumber);
+//   this.router.navigate(['flights', flight.flightNumber]);
+// }
+
+viewFlightDetails(flight: Flight): void {
+  this.router.navigate(['flights', flight.flightNumber]); 
 }
 }

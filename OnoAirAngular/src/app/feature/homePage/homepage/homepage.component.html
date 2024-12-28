@@ -6,8 +6,8 @@
     <mat-card class="flight-card" appearance="outlined">
 
         <div class="flights">
-            <div *ngFor="let flight of lastMinuteFlights" class="flight-card">
-
+            <div *ngFor="let flight of lastMinuteFlights" class="flight-card"
+                  (click)="viewFlightDetails(flight.flight)">
         <img mat-card-image [src]="flight.imgUrl" alt="Flight image" >
         <mat-card-content>
             <p> {{ flight.flight.destination }} {{ flight.flight.boardingDate }}</p>
@@ -17,9 +17,9 @@
       </mat-card>
 
     <h2>Find a flight</h2>
+      <app-flights-list ></app-flights-list>
 
-
-    <mat-form-field appearance="fill">
+    <!-- <mat-form-field appearance="fill">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="search" >
       </mat-form-field>
@@ -65,7 +65,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       
-      </table>
+      </table> -->
 
 
 
