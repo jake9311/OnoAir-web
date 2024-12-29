@@ -4,9 +4,9 @@
     border: 1px solid gold;
     border-radius: 8px;
     padding: center;
-    text-align: center;
     justify-content: center;
     align-items:center;
+    display: flex;
     
 }
 
@@ -21,9 +21,7 @@
      font-size: 40px;   
      font-style: oblique;
     }
-    table {
-        width: 100%;
-      }
+  
       
       .mat-form-field {
         width: 100%;

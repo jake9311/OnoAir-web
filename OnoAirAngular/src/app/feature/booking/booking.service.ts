@@ -52,9 +52,10 @@ export class BookingService {
     return this.myBookings.map((booking) => ({...booking,
         image: this.destinationsService.getImgUrlbyDestinationAirportName(booking.to)})
   )}
-   generateId(): string {
-    return Math.random().toString(36).substring(2, 15); 
+  generateId(): string {
+    return Math.floor(Math.random() * 10000).toString();
   }
+  
   getBookingById(id: string): MyBooking | undefined {
     return this.myBookings.find((b) => b.id === id);
   }
