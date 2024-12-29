@@ -8,7 +8,8 @@ import { SingleFlightComponent } from './feature/flights/pages/single-flight/sin
 import { SingleDestinationComponent } from './feature/destinations/single-destination/single-destination/single-destination.component';
 import { SearchFlightComponent } from './feature/booking/pages/book-flight/search-flight/search-flight.component';
 import { BookFlightComponent } from './feature/booking/pages/book-a-flight/book-flight/book-flight.component';
-
+import { ViewBookingComponent } from './feature/booking/pages/view-booking/view-booking/view-booking.component';
+//import { viewBookingComponent } from './feature/booking/pages/view-booking/view-booking.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent},
@@ -20,5 +21,7 @@ export const routes: Routes = [
     {path: 'homepage', component: HomepageComponent},
     {path: 'flights/:flightNumber', component: SingleFlightComponent},
     {path: 'destinations/:destinationCode', component: SingleDestinationComponent},
-    {path: 'book-a-flight/:flightNumber', component: BookFlightComponent}
+    {path: 'book-a-flight/:flightNumber', component: BookFlightComponent},
+    //{ path: 'view-booking/:bookingId', component: viewBookingComponent },
+    {path: 'view-booking/:bookingId', component: ViewBookingComponent}
 ];

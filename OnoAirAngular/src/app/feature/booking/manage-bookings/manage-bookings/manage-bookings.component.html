@@ -10,6 +10,7 @@
           <p><strong>Origin:</strong> {{ booking.from }} Boarding: {{ booking.fromDate }}</p>
           <p><strong>Destination:</strong> {{ booking.to }} Landing: {{ booking.toDate }}</p>
           <p><strong>No. of passengers:</strong> {{ booking.numOfPassengers }}</p>
+            <button mat-button color="primary" (click)="viewBooking(booking)">view</button>
         </div>
       </div>
     </div>
@@ -23,6 +24,7 @@
           <p><strong>Origin:</strong> {{booking.from }} Boarding: {{booking.fromDate }}</p>
           <p><strong>Destination:</strong> {{ booking.to }} Landing: {{ booking.toDate }}</p>
           <p><strong>No. of passengers:</strong> {{ booking.numOfPassengers }}</p>
+          <button mat-button color="primary" (click)="viewBooking(booking)">view</button>
         </div>
       </div>
     </div>
