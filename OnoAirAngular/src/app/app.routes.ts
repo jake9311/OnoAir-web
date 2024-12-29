@@ -23,5 +23,6 @@ export const routes: Routes = [
     {path: 'destinations/:destinationCode', component: SingleDestinationComponent},
     {path: 'book-a-flight/:flightNumber', component: BookFlightComponent},
     {path: 'view-booking/:bookingId', component: ViewBookingComponent},
-    {path: 'help', component: HelpComponent}
+    {path: 'help', component: HelpComponent},
+    {path: '**', component: HomepageComponent}
 ];

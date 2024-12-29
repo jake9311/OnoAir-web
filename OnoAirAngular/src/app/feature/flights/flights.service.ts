@@ -91,7 +91,7 @@ export class FlightsService {
 
  generateFlightDate(daysFromTodayForFlight: number,):
   { flightDate: string; } {
-    const today = new Date();Number
+    const today = new Date();
 
     const flightDateTime = new Date(today);
     flightDateTime.setDate(today.getDate() + daysFromTodayForFlight);
