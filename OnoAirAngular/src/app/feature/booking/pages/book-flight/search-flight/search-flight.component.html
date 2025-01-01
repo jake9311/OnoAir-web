@@ -3,19 +3,17 @@
 <h1>Search a Flight</h1>
 <div class="list-filter">
     <mat-form-field appearance="fill">
-        <mat-label>Filter</mat-label>
+        <mat-label>Search</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="search" >
       </mat-form-field>
     </div>
+
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      
-     
         <ng-container matColumnDef="flightNumber">
           <th mat-header-cell *matHeaderCellDef> flight No. </th>
           <td mat-cell *matCellDef="let flight"> {{flight.flightNumber}} </td>
         </ng-container>
-      
-    
+
         <ng-container matColumnDef="origin">
           <th mat-header-cell *matHeaderCellDef> origin </th>
           <td mat-cell *matCellDef="let flight"> {{flight.origin}} </td>

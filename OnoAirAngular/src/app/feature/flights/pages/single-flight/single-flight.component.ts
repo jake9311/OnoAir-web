@@ -4,11 +4,10 @@ import { FlightsService } from '../../flights.service';
 import { Flight } from '../../flight-model/flight-model';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatTableModule} from '@angular/material/table';
-import { Input } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { Input } from '@angular/core';
 
 
 
@@ -19,7 +18,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './single-flight.component.css'
 })
 export class SingleFlightComponent implements OnInit {
+  @Input() flightNumber: string | undefined;
   flight: Flight | undefined;
+  flightNotFound: boolean = false;
   constructor(private flightsService: FlightsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -29,6 +30,12 @@ export class SingleFlightComponent implements OnInit {
     if (flight){
       this.flight = flight;
   }
+  else{
+    this.flightNotFound = true;
+  }
+  }
+  else{
+    this.flightNotFound = true;
   }
   }
 

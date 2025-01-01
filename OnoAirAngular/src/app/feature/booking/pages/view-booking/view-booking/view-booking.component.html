@@ -1,4 +1,9 @@
 
+<div *ngIf="!booking" class="error-message">
+  <p>Booking with this Id number: {{ bookingId }} , does not exist. Please check the Booking Id and try again.</p>
+</div>
+
+
 
 <div *ngIf="booking" class="view-booking">
   <h1>Booking Details</h1>
@@ -9,16 +14,15 @@
     <mat-card-content>
       <div class="booking-details">
         <p><strong>Origin:</strong> {{ booking.from }}</p>
-        <p><strong>Boarding Date:</strong> {{ booking.fromDate }} at {{ booking.fromTime }}</p>
+        <p><strong>Boarding Date:</strong> {{ booking.fromDate | date: 'dd/MM/yyyy HH:mm' }} </p>
         <p><strong>Destination:</strong> {{ booking.to }}</p>
-        <p><strong>Landing Date:</strong> {{ booking.toDate }} at {{ booking.toTime }}</p>
-        <p><strong>No. of Passengers:</strong>  2 </p>
-        <p><strong> Passenger 1:</strong>   </p>
-        <p><strong> Name:</strong>  Yakov Makoria </p>
-        <p><strong> Pasport No.:</strong>  3456123456 </p>
-        <p><strong> Passenger 2:</strong> </p>
-        <p><strong> Name:</strong>  Noam Ben-Asuli</p>
-        <p><strong> Pasport No.:</strong>  3456123456 </p>
+        <p><strong>Landing Date:</strong> {{ booking.toDate | date: 'dd/MM/yyyy HH:mm'}} </p>
+        <p><strong>No. of Passengers:</strong>  {{ booking.numOfPassengers}} </p>
+          <ul>
+            <li *ngFor="let passenger of booking.passengers">
+              <strong>Name:</strong> {{ passenger.name }} , <strong>Passport no. :</strong>{{ passenger.passport }}
+            </li>
+          </ul>
       </div>
   </mat-card-content>
   </div>

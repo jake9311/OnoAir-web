@@ -7,16 +7,16 @@ import { DestinationsService } from '../destinations/destinations.service';
 })
 export class BookingService {
   private myBookings = [
-  new MyBooking(this.generateId(), "Ben Gurion Airport", "01/07/2025", "10:30", "John F. Kennedy Airport", "01/07/2025", "15:30", 8),
-  new MyBooking(this.generateId(),"John F. Kennedy Airport", "15/06/2024", "08:00", "Heathrow Airport", "15/06/2024", "18:30", 2),
-  new MyBooking(this.generateId(),"Heathrow Airport", "10/05/2025", "16:00", "Charles de Gaulle Airport", "10/05/2025", "17:30", 4),
-  new MyBooking(this.generateId(),"Dubai International Airport", "20/04/2024", "22:30", "Kingsford Smith Airport", "21/04/2024", "10:00", 5),
-  new MyBooking(this.generateId(),"Leonardo da Vinci Airport", "18/03/2025", "13:45", "Berlin Brandenburg Airport", "18/03/2025", "16:00", 1),
-  new MyBooking(this.generateId(),"Charles de Gaulle Airport", "07/02/2024", "09:15", "Ben Gurion Airport", "07/02/2024", "13:15", 6),
-  new MyBooking(this.generateId(),"Kingsford Smith Airport", "12/01/2024", "14:30", "Dubai International Airport", "12/01/2024", "19:15", 2),
-  new MyBooking(this.generateId(),"Dubai International Airport", "25/12/2023", "23:50", "Ben Gurion Airport", "26/12/2023", "07:30", 3),
-  new MyBooking(this.generateId(),"Los Angeles International Airport", "05/11/2023", "06:00", "Tokyo Haneda Airport", "05/11/2023", "15:15", 2),
-  new MyBooking(this.generateId(),"Tokyo Haneda Airport", "20/10/2023", "21:00", "Los Angeles International Airport", "21/10/2023", "15:30", 7)
+  new MyBooking(this.generateId(), "Ben Gurion Airport",this.generateDate(50,"10:30") , "John F. Kennedy Airport",this.generateDate(50,"15:30") , 2, [{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'}]),
+  new MyBooking(this.generateId(),"John F. Kennedy Airport",this.generateDate(21,"08:00") , "Heathrow Airport", this.generateDate(21,"18:30") , 3, [{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'},{name:'alex', passport: '123498589'}]),
+  new MyBooking(this.generateId(),"Heathrow Airport", this.generateDate(10,"16:00"), "Charles de Gaulle Airport",this.generateDate(10,"17:30") , 4,[{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'},{name:'alex', passport: '123498589'},{name:'koko', passport: '311111111'}]),
+  new MyBooking(this.generateId(),"Dubai International Airport",this.generateDate(-20,"22:30") , "Kingsford Smith Airport", this.generateDate(-20,"10:00"), 5,[{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'},{name:'alex', passport: '123498589'},{name:'koko', passport: '311111111'},{name:'shely', passport: '666334495'}]),
+  new MyBooking(this.generateId(),"Leonardo da Vinci Airport", this.generateDate(30,"09:45") , "Berlin Brandenburg Airport", this.generateDate(30,"16:00") , 1,[{name: 'shely',passport:'666334495'}]),
+  new MyBooking(this.generateId(),"Charles de Gaulle Airport", this.generateDate(10,"09:15") , "Ben Gurion Airport", this.generateDate(10,"13:15"), 2,[{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'}]),
+  new MyBooking(this.generateId(),"Kingsford Smith Airport", this.generateDate(-10,"14:30") , "Dubai International Airport", this.generateDate(-10,"19:15") , 2,[{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'}]),
+  new MyBooking(this.generateId(),"Dubai International Airport", this.generateDate(-27,"23:50") , "Ben Gurion Airport", this.generateDate(-27,"07:30") , 3,[{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'},{name:'alex', passport: '123498589'}]),
+  new MyBooking(this.generateId(),"Los Angeles International Airport", this.generateDate(10,"06:00") , "Tokyo Haneda Airport", this.generateDate(10,"15:15"), 2,[{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'}]),
+  new MyBooking(this.generateId(),"Tokyo Haneda Airport", this.generateDate(2,"21:00") , "Los Angeles International Airport", this.generateDate(2,"15:30"), 5,[{name: 'yakov makoria', passport: '123456789'}, {name: 'noam ben-asuli', passport: '3456123456'},{name:'alex', passport: '123498589'},{name:'koko', passport: '311111111'},{name:'shely', passport: '666334495'}])
 ]
   constructor( private destinationsService: DestinationsService ) { }
  list(): MyBooking[] {
@@ -60,4 +60,12 @@ export class BookingService {
     return this.myBookings.find((b) => b.id === id);
   }
 
+  private generateDate(changeDays: number, time: string): Date {
+    const date = new Date();
+    date.setDate(date.getDate() + changeDays); 
+    const [hours, minutes] = time.split(':').map(Number); 
+    date.setHours(hours, minutes, 0, 0); 
+    return date;
+  }
+  
 }

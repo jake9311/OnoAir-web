@@ -34,16 +34,7 @@ export class HomepageComponent implements OnInit {
   this.dataSource.data = this.flightsService.list();
  }
 
-//  applyFilter(event: Event): void {
-//   const filterValue = (event.target as HTMLInputElement).value;
-//   this.dataSource.filter = filterValue.trim().toLowerCase();
-// }
 
-//selectedFlight: Flight | null = null;
-// bookFlight(flight: Flight): void {
-//   console.log('Navigating to flight:', flight.flightNumber);
-//   this.router.navigate(['flights', flight.flightNumber]);
-// }
 
 viewFlightDetails(flight: Flight): void {
   this.router.navigate(['flights', flight.flightNumber]); 
