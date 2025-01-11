@@ -7,11 +7,12 @@ import { OnInit } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-manage-flights',
-  imports: [MatTableModule,MatFormFieldModule, MatInputModule],
+  imports: [MatTableModule,MatFormFieldModule, MatInputModule,MatIcon],
   templateUrl: './manage-flights.component.html',
   styleUrl: './manage-flights.component.css'
 })
@@ -31,4 +32,13 @@ export class ManageFlightsComponent implements OnInit {
   watchFlight(flight: Flight): void {
     this.router.navigate(['flights', flight.flightNumber]);
   }
+
+  deleteFlight(flight: Flight): void {
+    console.log('delete flight');
+}
+
+edeitFlight(flight: Flight): void {
+  console.log('edit flight');
+}
+
 }

@@ -50,7 +50,9 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let flight">
-          <button mat-button color="primary" (click)="watchFlight(flight)">manage</button>
+          <button mat-icon-button color="primary" (click)="edeitFlight(flight)"><mat-icon>edit</mat-icon></button>
+
+          <button mat-icon-button color="warm" (click)="deleteFlight(flight)"><mat-icon>close</mat-icon></button>
         </td>
       </ng-container>
 

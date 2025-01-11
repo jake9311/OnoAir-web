@@ -37,7 +37,8 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let destination">
-          <button mat-button color="primary" (click)="watchDestination(destination)">manage</button>
+          <button mat-icon-button color="primary" (click)="editDestination(destination)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warm" (click)="deleteDestination(destination)"><mat-icon>close</mat-icon></button>
         </td>
       </ng-container>
 
@@ -46,4 +47,9 @@
   
   </table>
 
-  
+  <div class="add-destination-button">
+    <button mat-icon-button color="primary" (click)="addDestination()">
+      Add Destination
+    </button>
+  </div>
+  [routerLink]="['/add-destinatio']"

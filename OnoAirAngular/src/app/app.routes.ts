@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomepageComponent } from './feature/homePage/homepage/homepage.component';
-import { ManageDestinationsComponent } from './feature/destinations/manage-destinations/manage-destinations.component';
+import { ManageDestinationsComponent } from './feature/destinations/pages/manage-destinations/manage-destinations.component';
 import { ManageFlightsComponent } from './feature/flights/pages/manage-flights/manage-flights.component';
 import { ManageBookingsComponent } from './feature/booking/manage-bookings/manage-bookings/manage-bookings.component';
 import { FlightsListComponent } from './feature/flights/pages/flights-list/flights-list.component';
@@ -10,6 +10,8 @@ import { SearchFlightComponent } from './feature/booking/pages/book-flight/searc
 import { BookFlightComponent } from './feature/booking/pages/book-a-flight/book-flight/book-flight.component';
 import { ViewBookingComponent } from './feature/booking/pages/view-booking/view-booking/view-booking.component';
 import { HelpComponent } from './feature/help/help/help.component';
+import { AddDestinationComponent } from './feature/destinations/pages/add-destination/add-destination/add-destination.component';
+
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent},
@@ -23,5 +25,7 @@ export const routes: Routes = [
     {path: 'book-a-flight/:flightNumber', component: BookFlightComponent},
     {path: 'view-booking/:bookingId', component: ViewBookingComponent},
     {path: 'help', component: HelpComponent},
-    {path: '**', component: HomepageComponent}
+    {path: '**', component: HomepageComponent},
+    {path: 'add-destination', component: AddDestinationComponent},
+    
 ];
