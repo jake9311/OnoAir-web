@@ -1,0 +1,36 @@
+
+<div *ngIf="!booking" class="error-message">
+  <p>Booking with this Id number: {{ bookingId }} , does not exist. Please check the Booking Id and try again.</p>
+</div>
+
+
+
+<div *ngIf="booking" class="view-booking">
+  <h1>Booking Details</h1>
+  <mat-card class="booking-card" appearance="outlined">
+  <div class="booking-card">
+    <div *ngif="booking" class="booking-card"></div>
+    <img mat-card-image [src]="imgUrl" alt="Destination image" class="booking-image">
+    <mat-card-content>
+      <div class="booking-details">
+        <p><strong>Origin:</strong> {{ booking.from }}</p>
+        <p><strong>Boarding Date:</strong> {{ booking.fromDate | date: 'dd/MM/yyyy HH:mm' }} </p>
+        <p><strong>Destination:</strong> {{ booking.to }}</p>
+        <p><strong>Landing Date:</strong> {{ booking.toDate | date: 'dd/MM/yyyy HH:mm'}} </p>
+        <p><strong>No. of Passengers:</strong>  {{ booking.numOfPassengers}} </p>
+          <ul>
+            <li *ngFor="let passenger of booking.passengers">
+              <strong>Name:</strong> {{ passenger.name }} , <strong>Passport no. :</strong>{{ passenger.passport }}
+            </li>
+          </ul>
+      </div>
+  </mat-card-content>
+  </div>
+</mat-card>
+
+
+
+
+
+
+

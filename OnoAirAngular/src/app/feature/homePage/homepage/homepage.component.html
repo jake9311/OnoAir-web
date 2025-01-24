@@ -1,0 +1,31 @@
+
+<div class="homepage">
+    <h1>Last minute flights</h1>
+
+
+    <mat-card class="flight-card" appearance="outlined">
+
+        <div class="flights" *ngIf="lastMinuteFlights.length>0;else noFlights">
+            <div *ngFor="let flight of lastMinuteFlights" class="flight-card"
+                  (click)="viewFlightDetails(flight.flight)">
+        <img mat-card-image [src]="flight.imgUrl" alt="Flight image" >
+        <mat-card-content>
+            <p> {{ flight.flight.destination }} {{ flight.flight.boardingDate }}</p>
+        </mat-card-content>
+        </div></div>
+      
+      </mat-card>
+      <ng-template #noFlights>
+        <p class="no-flights-message">No last-minute flights available at the moment</p>
+    </ng-template>
+
+    <h2>Find a flight</h2>
+      <app-flights-list ></app-flights-list>
+
+
+
+  </div>
+  
+
+
+ 
