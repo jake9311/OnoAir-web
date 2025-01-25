@@ -1,0 +1,27 @@
+.add-destination-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .add-destination-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  mat-label {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  

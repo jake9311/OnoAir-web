@@ -1,0 +1,101 @@
+<div class="add-destination-container">
+  <h1>Add Destination</h1>
+
+  <form
+    (ngSubmit)="onSubmit()"
+    #destinationForm="ngForm"
+    class="add-destination-form"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>Destination Name</mat-label>
+      <input
+        matInput
+        name="name"
+        [(ngModel)]="newDestination.name"
+        placeholder="Enter destination name"
+        required
+        #name="ngModel"
+      />
+      <mat-error *ngIf="name.invalid && name.touched">
+        Destination name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Airport Name</mat-label>
+      <input
+        matInput
+        name="airportName"
+        [(ngModel)]="newDestination.airportName"
+        placeholder="Enter airport name"
+        required
+        #airportName="ngModel"
+      />
+      <mat-error *ngIf="airportName.invalid && airportName.touched">
+        Airport name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Airport Code</mat-label>
+      <input
+        matInput
+        name="destinationCode"
+        [(ngModel)]="newDestination.destinationCode"
+        placeholder="Enter airport code "
+        required
+        pattern="[A-Z]{3}"
+        #destinationCode="ngModel"
+      />
+      <mat-error *ngIf="destinationCode.invalid && destinationCode.touched">
+        Airport code must be 3 uppercase letters.
+      </mat-error>
+    </mat-form-field>
+
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Airport Website</mat-label>
+      <input 
+        matInput 
+        name="airportWebsite" 
+        [(ngModel)]="newDestination.airportWebsite" 
+        placeholder="Enter airport website URL"
+        required 
+        pattern="https?://.+"
+        #airportWebsite="ngModel" />
+      <mat-error *ngIf="airportWebsite.invalid && airportWebsite.touched">
+        Please enter a valid URL (e.g., https://example.com).
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Image URL</mat-label>
+        <input 
+          matInput 
+          name="airportImg" 
+          [(ngModel)]="newDestination.airportImg" 
+          placeholder="Enter image URL"
+          required 
+          pattern="https?://.+"
+          (input)="updateImagePreview()"
+          #airportImg="ngModel" />
+        <mat-error *ngIf="airportImg.invalid && airportImg.touched">
+          Please enter a valid image URL.
+        </mat-error>
+      </mat-form-field>
+      <div class="image-preview" *ngIf="imagePreview">
+        <p>Image Preview:</p>
+        <img [src]="imagePreview" alt="Image Preview" />
+      </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!destinationForm.valid"
+    >
+      Add Destination
+    </button>
+  </form>
+</div>

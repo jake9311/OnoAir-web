@@ -1,0 +1,13 @@
+[debug] [2025-01-25T16:18:24.464Z] ----------------------------------------------------------------------
+[debug] [2025-01-25T16:18:24.466Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\home\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login:add
+[debug] [2025-01-25T16:18:24.466Z] CLI Version:   13.29.2
+[debug] [2025-01-25T16:18:24.467Z] Platform:      win32
+[debug] [2025-01-25T16:18:24.467Z] Node Version:  v22.11.0
+[debug] [2025-01-25T16:18:24.467Z] Time:          Sat Jan 25 2025 18:18:24 GMT+0200 (Israel Standard Time)
+[debug] [2025-01-25T16:18:24.467Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=41785800&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
