@@ -1,0 +1,32 @@
+<div class="my-bookings-page">
+    <h1>My Bookings</h1>
+  
+   
+    <div class="section">
+      <h2>Upcoming Bookings</h2>
+      <div class="booking-card" *ngFor="let booking of newBookings">
+        <img [src]="booking.image" alt="Destination Image" class="booking-image" />
+        <div class="booking-details">
+          <p><strong>Origin:</strong> {{ booking.from }} Boarding: {{ booking.fromDate }}</p>
+          <p><strong>Destination:</strong> {{ booking.to }} Landing: {{ booking.toDate }}</p>
+          <p><strong>No. of passengers:</strong> {{ booking.numOfPassengers }}</p>
+            <button mat-button color="primary" (click)="viewBooking(booking)">view</button>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="section">
+      <h2>Previous Bookings</h2>
+      <div class="booking-card" *ngFor="let booking of previousBookings">
+        <img [src]="booking.image" alt="Destination Image" class="booking-image" />
+        <div class="booking-details">
+          <p><strong>Origin:</strong> {{booking.from }} Boarding: {{booking.fromDate }}</p>
+          <p><strong>Destination:</strong> {{ booking.to }} Landing: {{ booking.toDate }}</p>
+          <p><strong>No. of passengers:</strong> {{ booking.numOfPassengers }}</p>
+          <button mat-button color="primary" (click)="viewBooking(booking)">view</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,17 @@
+footer{
+position: fixed;
+bottom: 0;
+width: 100%;
+background-color: greenyellow;
+padding-right: 5px;
+}
+.footer_icon{
+font-size: 20px;
+margin-left: auto;
+}
+a{
+    color: black;
+}
+a:huver{
+    color: rebeccapurple;
+}

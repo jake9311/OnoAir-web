@@ -1,0 +1,9 @@
+.menu_icon :hover{
+color:black;
+}
+mat- menu button:hover{
+    background-color: blueviolet;
+}
+ mat- menu button{
+    color: aqua;
+ }
