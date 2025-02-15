@@ -11,11 +11,13 @@ import { MatIcon } from '@angular/material/icon';
 import { objectStatus } from '../../../../shared/object-status/object-status.enum';
 import { CommonModule } from '@angular/common';
 import { FlightsService } from '../../../flights/flights.service';
-
+import {MatDialogModule,MatDialog} from '@angular/material/dialog';
+import { DialogComponent } from '../../../../shared/dialog/dialog/dialog.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-destinations',
-  imports: [MatInputModule,MatFormFieldModule,MatTableModule, MatIcon,RouterModule,CommonModule],
+  imports: [MatInputModule,MatFormFieldModule,MatTableModule, MatIcon,RouterModule,CommonModule,MatDialogModule],
   templateUrl: './manage-destinations.component.html',
   styleUrl: './manage-destinations.component.css'
 })
@@ -26,7 +28,9 @@ export class ManageDestinationsComponent implements OnInit {
   constructor(
     private destinationsService: DestinationsService,
     private router: Router,
-    private flightsService: FlightsService
+    private flightsService: FlightsService,
+    private dialog: MatDialog
+    
   ){}
   ngOnInit(): void {
     this.refreshTable();
@@ -58,26 +62,56 @@ confirmDeleteDestination(destination: Destination): void {
   }
 }
 
+// toggleDestinationStatus(destination: Destination): void {
+//   const confirmationMessage =destination.status === objectStatus.Active 
+//   ? 'Are you sure you want to deactivate this destination?' : 'Are you sure you want to activate this destination?';
+//   const confirmation = window.confirm(confirmationMessage);
+//   if (confirmation) {
+//     if (this.hasActiveFlights(destination.name)) {
+//       alert(`Cannot delete destination ${destination.name} because there are active flights associated with it.`);
+//       return;
+//     }
+//     else{
+//     this.destinationsService.updateDestinationStatus(destination.destinationCode, destination.status === objectStatus.Active ? objectStatus.Inactive : objectStatus.Active);
+//     this.refreshTable();
+//   }
+// }}
+
 toggleDestinationStatus(destination: Destination): void {
-  const confirmationMessage =destination.status === objectStatus.Active 
-  ? 'Are you sure you want to deactivate this destination?' : 'Are you sure you want to activate this destination?';
-  const confirmation = window.confirm(confirmationMessage);
-  if (confirmation) {
+  const confirmationMessage =
+    destination.status === objectStatus.Active
+      ? 'Are you sure you want to deactivate this destination?'
+      : 'Are you sure you want to activate this destination?';
+
+  this.openDialog('Confirm Action', confirmationMessage).subscribe(result => {
+    if (!result) return;
+
     if (this.hasActiveFlights(destination.name)) {
-      alert(`Cannot delete destination ${destination.name} because there are active flights associated with it.`);
+      this.openDialog('Action Denied', `Cannot delete destination ${destination.name} because there are active flights associated with it.`).subscribe();
       return;
     }
-    else{
-    this.destinationsService.updateDestinationStatus(destination.destinationCode, destination.status === objectStatus.Active ? objectStatus.Inactive : objectStatus.Active);
+
+    this.destinationsService.updateDestinationStatus(
+      destination.destinationCode,
+      destination.status === objectStatus.Active ? objectStatus.Inactive : objectStatus.Active
+    );
     this.refreshTable();
-  }
-}}
+  });
+}
+
 
 private hasActiveFlights(destination: string): boolean {
   return this.flightsService.list().some(
     flight => flight.status === 'Active' && (flight.origin === destination || flight.destination === destination)
   );
 }
+openDialog(title: string, message: string): Observable<boolean> {
+  const dialogRef = this.dialog.open(DialogComponent, {
+    width: '400px',
+    data: { title, message }
+  });
 
+  return dialogRef.afterClosed();
+}
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FlightsService } from '../../../flights.service';
 import { Flight } from '../../../flight-model/flight-model';
@@ -16,12 +17,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { NgForm } from '@angular/forms';
 import { objectStatus } from '../../../../../shared/object-status/object-status.enum';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from '../../../../../shared/dialog/dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
   selector: 'app-edit-flight',
   imports: [RouterModule, MatTableModule, CommonModule, MatFormFieldModule, FormsModule,MatSelectModule,MatRadioModule,MatTableModule,MatInputModule
-    ,MatDatepickerModule,MatNativeDateModule,MatButtonModule,MatButtonModule],
+    ,MatDatepickerModule,MatNativeDateModule,MatButtonModule,MatButtonModule,MatDialogModule],
   templateUrl: './edit-flight.component.html',
   styleUrl: './edit-flight.component.css'
 })
@@ -32,7 +36,8 @@ export class EditFlightComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private flightsService: FlightsService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -68,8 +73,11 @@ export class EditFlightComponent implements OnInit {
     arrivalDate.setHours(0, 0, 0, 0);
 
     if (arrivalDate.getTime() < boardingDate.getTime()) {
-      alert(' Arrival date must be after the boarding date.');
-      return false;
+      if (arrivalDate.getTime() < boardingDate.getTime()) {
+        alert("❌ Arrival date must be after the boarding date.");
+        return false;
+      }
+      
     }
 
    
@@ -98,6 +106,15 @@ export class EditFlightComponent implements OnInit {
     const newDate = new Date(date);
     newDate.setHours(hours, minutes, 0, 0);
     return newDate;
+}
+
+openDialog(title: string, message: string): Observable<boolean> {
+  const dialogRef = this.dialog.open(DialogComponent, {
+    width: '400px',
+    data: { title, message }
+  });
+
+  return dialogRef.afterClosed();
 }
 
 }
