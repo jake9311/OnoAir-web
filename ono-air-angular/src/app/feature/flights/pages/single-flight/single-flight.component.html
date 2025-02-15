@@ -27,5 +27,10 @@
       </p>
       <p><strong>Number of seats:</strong> {{ flight.numOfSeats }}</p>
     </mat-card-content>
+    <mat-card-actions class="button-container">
+      <button mat-raised-button class="book-btn" color="accent" (click)="bookFlight(flight)">
+        ✈️ Book Flight
+      </button>
+    </mat-card-actions>
   </mat-card>
 </div>

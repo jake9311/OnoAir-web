@@ -13,6 +13,8 @@ import { HelpComponent } from './feature/help/help/help.component';
 import { AddDestinationFormComponent } from './feature/destinations/pages/add-destination-form/add-destination-form.component';
 import { EditFlightComponent } from './feature/flights/pages/edit-flight/edit-flight/edit-flight.component';
 import { AddFlightComponent } from './feature/flights/pages/add-flight/add-flight/add-flight.component';
+import { EditDestinationComponent } from './feature/destinations/pages/edit-destination/edit-destination/edit-destination.component';
+import { SpecialFlightSearchComponent } from './feature/flights/pages/special-flight-search/special-flight-search.component';
 
 
 export const routes: Routes = [
@@ -30,6 +32,8 @@ export const routes: Routes = [
     {path: 'add-destination', component: AddDestinationFormComponent},
     {path: 'edit-flight/:flightNumber', component: EditFlightComponent},
     {path: 'add-flight', component: AddFlightComponent},
+    {path: 'edit-destination/:destinationCode', component: EditDestinationComponent},
+    {path: 'special-flight-search', component: SpecialFlightSearchComponent},
     {path: '**', component: HomepageComponent},
 
 ];

@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { objectStatus } from '../../../../shared/object-status/object-status.enum';
 
 @Component({
   selector: 'app-add-destination-form',
@@ -18,7 +19,8 @@ export class AddDestinationFormComponent {
     airportName: '',
     destinationCode: '',
     airportWebsite: '',
-    airportImg: ''
+    airportImg: '',
+    status: objectStatus.Active
   };
   imagePreview: string | null = null;
   updateImagePreview(): void {

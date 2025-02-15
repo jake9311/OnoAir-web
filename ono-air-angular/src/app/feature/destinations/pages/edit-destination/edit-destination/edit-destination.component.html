@@ -1,0 +1,59 @@
+<div class="edit-destination-container" *ngIf="destination">
+    <h1>Edit Destination</h1>
+  
+    <form (ngSubmit)="saveChanges()" #destinationForm="ngForm" class="edit-destination-form">
+      
+      <label for="name"> Name:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="destination.name" name="name" required minlength="3" #name="ngModel" />
+        <mat-error *ngIf="name.invalid && name.touched">
+          Destination name is required and must be at least 3 characters long.
+        </mat-error>
+      </mat-form-field>
+  
+      <label for="airportName"> Airport Name:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Airport Name</mat-label>
+        <input matInput [(ngModel)]="destination.airportName" name="airportName" required  #airportName="ngModel"  />
+        <mat-error *ngIf="airportName.invalid && airportName.touched">
+          Airport Name is required.
+        </mat-error>
+      </mat-form-field>
+  
+     <label for="destinationCode"> Airport Code:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Airport Code</mat-label>
+        <input matInput [(ngModel)]="destination.destinationCode" name="destinationCode" disabled />
+      </mat-form-field>
+  
+      <label for="airportWebsite"> Airport Website:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Airport Website</mat-label>
+        <input matInput [(ngModel)]="destination.airportWebsite" name="airportWebsite" required pattern="https?://.+" #airportWebsite="ngModel"  />
+        <mat-error *ngIf="airportWebsite.invalid && airportWebsite.touched">
+          Please enter a valid URL (e.g., https://example.com).
+        </mat-error>
+      </mat-form-field>
+  
+     <label for="airportImg"> Airport Image URL:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Airport Image URL</mat-label>
+        <input matInput [(ngModel)]="destination.airportImg" name="airportImg" required pattern="https?://.+" (input)="updateImagePreview()" #airportImg="ngModel" />
+        <mat-error *ngIf="airportImg.invalid && airportImg.touched">
+          Please enter a valid image URL.
+        </mat-error>
+      </mat-form-field>
+  
+      <label for="status">Status</label>
+      <mat-radio-group [(ngModel)]="destination.status" name="status" required>
+        <mat-radio-button *ngFor="let status of destinationStatuses" [value]="status">
+          {{ status }}
+        </mat-radio-button>
+      </mat-radio-group>
+      
+  
+     <div class="save-button">
+      <button mat-raised-button color="primary" type="submit">Save Changes</button>
+  </div>
+</form>

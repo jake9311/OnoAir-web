@@ -1,1 +1,81 @@
-<p>edit-flight works!</p>
+<div class="edit-flight-container" *ngIf="flight">
+  <h1>Edit Flight</h1>
+
+  <form #editFlightForm="ngForm" (ngSubmit)="saveChanges(editFlightForm)" class="edit-flight-form">
+    
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Flight No.</mat-label>
+      <input matInput [(ngModel)]="flight.flightNumber" name="flightNumber" disabled />
+    </mat-form-field>
+
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Origin</mat-label>
+      <input matInput [(ngModel)]="flight.origin" name="flightOrigin" disabled />
+    </mat-form-field>
+
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Destination</mat-label>
+      <input matInput [(ngModel)]="flight.destination" name="flightDestination" disabled />
+    </mat-form-field>
+
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Boarding Date</mat-label>
+      <input matInput [matDatepicker]="boardingPicker" [(ngModel)]="flight.boardingDate" name="boardingDate" required (ngModelChange)="validateDates()" />
+      <mat-datepicker-toggle matIconSuffix [for]="boardingPicker"></mat-datepicker-toggle>
+      <mat-datepicker #boardingPicker></mat-datepicker>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Boarding Time</mat-label>
+      <input matInput type="time" [(ngModel)]="flight.boardingTime" name="boardingTime" required (ngModelChange)="validateDates()" />
+    </mat-form-field>
+
+   
+    <mat-form-field appearance="fill">
+      <mat-label>Arrival Date</mat-label>
+      <input matInput [matDatepicker]="arrivalPicker" [(ngModel)]="flight.arrivalDate" name="arrivalDate" required (ngModelChange)="validateDates()" />
+      <mat-datepicker-toggle matIconSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
+      <mat-datepicker #arrivalPicker></mat-datepicker>
+    </mat-form-field>
+
+   
+    <mat-form-field appearance="fill">
+      <mat-label>Arrival Time</mat-label>
+      <input matInput type="time" [(ngModel)]="flight.arrivalTime" name="arrivalTime" required (ngModelChange)="validateDates()" />
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Number of Seats</mat-label>
+      <input matInput type="number" [(ngModel)]="flight.numOfSeats" name="numOfSeats" required min="1" />
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="flight.status" name="status" required>
+        <mat-option *ngFor="let status of flightStatuses" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  
+    <div class="save-button">
+      <button mat-raised-button color="primary" type="submit" [disabled]="editFlightForm.invalid">
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+
+
+<div *ngIf="!flight">
+  <h2>Flight not found!</h2>
+  <p>The flight you are trying to edit does not exist.</p>
+</div>

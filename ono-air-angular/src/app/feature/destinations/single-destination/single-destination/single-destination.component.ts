@@ -22,9 +22,9 @@ export class SingleDestinationComponent implements OnInit {
   ngOnInit() {
   const destinationCode=this.route.snapshot.paramMap.get('destinationCode')?.trim();
   if (destinationCode){
-    const flight = this.destinationsService.get(destinationCode);
-    if (flight){
-      this.destination = flight;
+    const destination = this.destinationsService.get(destinationCode);
+    if (destination){
+      this.destination = destination;
   }
   }
 }}

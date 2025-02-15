@@ -21,7 +21,9 @@
 
     <ng-container matColumnDef="airportWebsite">
         <th mat-header-cell *matHeaderCellDef> Airport Website </th>
-        <td mat-cell *matCellDef="let destination"> {{destination.airportWebsite}} </td>
+        <td mat-cell *matCellDef="let destination"><a [href]="destination.airportWebsite" target="_blank" rel="noopener noreferrer">
+          {{destination.airportWebsite}} 
+        </a></td>
       </ng-container>
 
 
@@ -31,6 +33,11 @@
           <img [src]="destination.airportImg" alt="Airport Image" width="100" height="90" />
         </td>
       </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status</th>
+        <td mat-cell *matCellDef="let destination"> {{destination.status}} </td>
+      </ng-container>
       
   
 
@@ -38,7 +45,14 @@
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let destination">
           <button mat-icon-button color="primary" (click)="editDestination(destination)"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button color="warm" (click)="deleteDestination(destination)"><mat-icon>close</mat-icon></button>
+
+          <button *ngIf="destination.status === 'Active'" mat-icon-button color="warn" (click)="toggleDestinationStatus(destination)">
+            <mat-icon>close</mat-icon>
+          </button>
+      
+          <button *ngIf="destination.status === 'Inactive'" mat-icon-button color="accent" (click)="toggleDestinationStatus(destination)">
+            <mat-icon>check</mat-icon>
+          </button>
         </td>
       </ng-container>
 

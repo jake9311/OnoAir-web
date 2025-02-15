@@ -1,20 +1,41 @@
 <div class="flight-details" *ngIf="flight">
-    <h1>Book a Flight</h1>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ flight.origin }} → {{ flight.destination }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Flight number:</strong> {{ flight.flightNumber }}</p>
-        <p><strong>Origin:</strong> {{ flight.origin }}{{' '}}<strong>Boarding date:</strong> {{ flight.boardingDate }}{{" "}}{{flight.boardingTime}}</p>
-        <p><strong>Destination:</strong> {{ flight.destination }}{{' '}}<strong>Arrival date:</strong> {{ flight.arrivalDate }}{{" "}}{{flight.arrivalTime}}</p>
-        
-         
-            <p> <strong>Number of seats:</strong> {{ flight.numOfSeats }}</p>
-         
-      </mat-card-content>
-    </mat-card>
-  </div>
-
- 
+  <h1>Book a Flight</h1>
   
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ flight.origin }} → {{ flight.destination }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Flight number:</strong> {{ flight.flightNumber }}</p>
+      <p><strong>Origin:</strong> {{ flight.origin }} <strong>Boarding date:</strong> {{ flight.boardingDate | date:'yyyy-MM-dd' }} {{ flight.boardingTime }}</p>
+      <p><strong>Destination:</strong> {{ flight.destination }} <strong>Arrival date:</strong> {{ flight.arrivalDate | date:'yyyy-MM-dd' }} {{ flight.arrivalTime }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Number of Passengers</mat-label>
+    <input matInput type="number" [(ngModel)]="numOfPassengers" name="numOfPassengers" (ngModelChange)="updatePassengerFields()" min="1" required />
+  </mat-form-field>
+
+  <form #bookingForm="ngForm" (ngSubmit)="submitBooking(bookingForm)" class="booking-form">
+
+    <div *ngFor="let passenger of passengers; let i = index" class="passenger-section">
+      <h3>Passenger {{ i + 1 }}</h3>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Full Name</mat-label>
+        <input matInput [(ngModel)]="passenger.name" name="name{{i}}" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Passport Number</mat-label>
+        <input matInput [(ngModel)]="passenger.passport" name="passport{{i}}" pattern="[0-9]{6,9}" required />
+        <mat-hint>Passport number must contain **only numbers** and be **6-9 digits long**</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="submit-button">
+      <button mat-raised-button color="primary" type="submit" [disabled]="bookingForm.invalid">Book Flight</button>
+    </div>
+  </form>
+</div>

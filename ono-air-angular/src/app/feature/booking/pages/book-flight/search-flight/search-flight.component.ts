@@ -7,10 +7,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-search-flight',
-  imports: [MatTableModule,MatFormFieldModule, MatInputModule],
+  imports: [MatTableModule,MatFormFieldModule, MatInputModule,MatIconModule],
   templateUrl: './search-flight.component.html',
   styleUrl: './search-flight.component.css'
 })
@@ -35,5 +36,9 @@ export class SearchFlightComponent implements OnInit {
 
   bookFlight(flight: Flight): void {
     this.router.navigate(['book-a-flight', flight.flightNumber]);
+  }
+
+  goToAdvancedSearch(): void {
+    this.router.navigate(['special-flight-search']);
   }
   }

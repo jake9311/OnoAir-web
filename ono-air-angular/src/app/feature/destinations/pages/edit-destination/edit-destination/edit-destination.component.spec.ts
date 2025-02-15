@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnvironmentTsComponent } from './environment.ts.component';
+import { EditDestinationComponent } from './edit-destination.component';
 
-describe('EnvironmentTsComponent', () => {
-  let component: EnvironmentTsComponent;
-  let fixture: ComponentFixture<EnvironmentTsComponent>;
+describe('EditDestinationComponent', () => {
+  let component: EditDestinationComponent;
+  let fixture: ComponentFixture<EditDestinationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EnvironmentTsComponent]
+      imports: [EditDestinationComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EnvironmentTsComponent);
+    fixture = TestBed.createComponent(EditDestinationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

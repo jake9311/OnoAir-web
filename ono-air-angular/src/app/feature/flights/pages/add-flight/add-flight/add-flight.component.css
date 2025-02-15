@@ -1,0 +1,20 @@
+.add-flight-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.add-flight-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.save-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}

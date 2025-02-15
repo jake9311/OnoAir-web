@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 
@@ -20,7 +21,7 @@ export class SingleFlightComponent implements OnInit {
   @Input() flightNumber: string | undefined;
   flight: Flight | undefined;
   flightNotFound = false;
-  constructor(private flightsService: FlightsService, private route: ActivatedRoute) { }
+  constructor(private flightsService: FlightsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
   const flightNumber=this.route.snapshot.paramMap.get('flightNumber')?.trim();
@@ -37,7 +38,9 @@ export class SingleFlightComponent implements OnInit {
     this.flightNotFound = true;
   }
   }
-
+  bookFlight(flight: Flight): void {
+    this.router.navigate(['book-a-flight', flight.flightNumber]);
+  }
 
 
 

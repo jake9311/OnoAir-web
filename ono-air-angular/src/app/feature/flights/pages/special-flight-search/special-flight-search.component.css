@@ -1,0 +1,38 @@
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .toggle-container button {
+    margin-right: 10px;
+  }
+  
+  .toggle-description {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  mat-form-field {
+    width: 300px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  table {
+    width: 80%;
+    margin-top: 20px;
+  }
+  

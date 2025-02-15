@@ -1,1 +1,83 @@
-<p>add-flight works!</p>
+<div class="add-flight-container">
+  <h1>Add Flight</h1>
+
+  <form #addFlightForm="ngForm" (ngSubmit)="saveFlight(addFlightForm)" class="add-flight-form">
+    
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Flight No.</mat-label>
+      <input matInput [(ngModel)]="newFlight.flightNumber" name="flightNumber" required />
+    </mat-form-field>
+
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Origin</mat-label>
+      <mat-select [(ngModel)]="newFlight.origin" name="origin" required>
+        <mat-option *ngFor="let destination of destinations" [value]="destination">
+          {{ destination }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+   
+    <mat-form-field appearance="fill">
+      <mat-label>Destination</mat-label>
+      <mat-select [(ngModel)]="newFlight.destination" name="destination" required>
+        <mat-option *ngFor="let destination of destinations" [value]="destination">
+          {{ destination }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Boarding Date</mat-label>
+      <input matInput [matDatepicker]="boardingPicker" [(ngModel)]="newFlight.boardingDate" name="boardingDate" required />
+      <mat-datepicker-toggle matIconSuffix [for]="boardingPicker"></mat-datepicker-toggle>
+      <mat-datepicker #boardingPicker></mat-datepicker>
+    </mat-form-field>
+
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Boarding Time</mat-label>
+      <input matInput type="time" [(ngModel)]="newFlight.boardingTime" name="boardingTime" required />
+    </mat-form-field>
+
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Arrival Date</mat-label>
+      <input matInput [matDatepicker]="arrivalPicker" [(ngModel)]="newFlight.arrivalDate" name="arrivalDate" required />
+      <mat-datepicker-toggle matIconSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
+      <mat-datepicker #arrivalPicker></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Arrival Time</mat-label>
+      <input matInput type="time" [(ngModel)]="newFlight.arrivalTime" name="arrivalTime" required />
+    </mat-form-field>
+
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Number of Seats</mat-label>
+      <input matInput type="number" [(ngModel)]="newFlight.numOfSeats" name="numOfSeats" required min="1" />
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="newFlight.status" name="status" required>
+        <mat-option *ngFor="let status of flightStatuses" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+ 
+    <div class="save-button">
+      <button mat-raised-button color="primary" type="submit" [disabled]="addFlightForm.invalid">
+        Add Flight
+      </button>
+    </div>
+  </form>
+</div>

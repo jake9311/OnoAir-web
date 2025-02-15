@@ -1,0 +1,14 @@
+.edit-flight-container {
+  max-width: 500px;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.save-button {
+  text-align: center;
+  margin-top: 20px;
+}

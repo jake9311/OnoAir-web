@@ -52,42 +52,42 @@
       </mat-error>
     </mat-form-field>
 
-
-
     <mat-form-field appearance="fill">
       <mat-label>Airport Website</mat-label>
-      <input 
-        matInput 
-        name="airportWebsite" 
-        [(ngModel)]="newDestination.airportWebsite" 
+      <input
+        matInput
+        name="airportWebsite"
+        [(ngModel)]="newDestination.airportWebsite"
         placeholder="Enter airport website URL"
-        required 
+        required
         pattern="https?://.+"
-        #airportWebsite="ngModel" />
+        #airportWebsite="ngModel"
+      />
       <mat-error *ngIf="airportWebsite.invalid && airportWebsite.touched">
         Please enter a valid URL (e.g., https://example.com).
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>Image URL</mat-label>
-        <input 
-          matInput 
-          name="airportImg" 
-          [(ngModel)]="newDestination.airportImg" 
-          placeholder="Enter image URL"
-          required 
-          pattern="https?://.+"
-          (input)="updateImagePreview()"
-          #airportImg="ngModel" />
-        <mat-error *ngIf="airportImg.invalid && airportImg.touched">
-          Please enter a valid image URL.
-        </mat-error>
-      </mat-form-field>
-      <div class="image-preview" *ngIf="imagePreview">
-        <p>Image Preview:</p>
-        <img [src]="imagePreview" alt="Image Preview" />
-      </div>
+      <mat-label>Airport Image URL:</mat-label>
+      <input
+        matInput
+        name="airportImg"
+        [(ngModel)]="newDestination.airportImg"
+        placeholder="Enter image URL"
+        required
+        pattern="https?://.+"
+        (input)="updateImagePreview()"
+        #airportImg="ngModel"
+      />
+      <mat-error *ngIf="airportImg.invalid && airportImg.touched">
+        Please enter a valid image URL.
+      </mat-error>
+    </mat-form-field>
+    <div class="image-preview" *ngIf="imagePreview">
+      <p>Image Preview:</p>
+      <img [src]="imagePreview" alt="Image Preview" />
+    </div>
 
     <button
       mat-raised-button

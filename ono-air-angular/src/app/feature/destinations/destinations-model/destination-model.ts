@@ -1,3 +1,4 @@
+import { objectStatus } from "../../../shared/object-status/object-status.enum";
 export class Destination {
     constructor(
         public name : string,
@@ -5,5 +6,6 @@ export class Destination {
         public destinationCode : string,
         public airportWebsite : string,
         public airportImg : string,
+        public status : objectStatus,
     ){}
 }

@@ -1,12 +1,21 @@
 
 
-<h1>Search a Flight</h1>
-<div class="list-filter">
-    <mat-form-field appearance="fill">
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="search" >
+
+
+<div class="search-container">
+  <h1>✈️ Search a Flight ✈️</h1>
+  
+  <div class="search-controls">
+      <mat-form-field appearance="outline" class="search-bar">
+          <mat-label>Search a Flight</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Enter flight number, origin or destination">
       </mat-form-field>
-    </div>
+
+      <button mat-raised-button class="special-search-btn" (click)=" goToAdvancedSearch()">
+          🔎 Advanced Search
+      </button>
+  </div>
+</div>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="flightNumber">
