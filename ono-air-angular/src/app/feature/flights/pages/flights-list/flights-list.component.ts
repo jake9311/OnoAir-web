@@ -7,9 +7,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-flights-list',
-  imports: [MatTableModule,MatFormFieldModule, MatInputModule],
+  imports: [MatTableModule,MatFormFieldModule, MatInputModule,MatProgressSpinnerModule,CommonModule],
   templateUrl: './flights-list.component.html',
   styleUrl: './flights-list.component.css'
 })
@@ -17,13 +19,15 @@ export class FlightsListComponent implements OnInit {
   flights : Flight[]=[];
    dataSource = new MatTableDataSource();
    displayedColumns: string[] = ['flightNumber', 'origin', 'destination', 'boardingDate', 'actions'];
+  loading=true;
   constructor(
     private flightsService: FlightsService,
     private router: Router
   ){}
-  ngOnInit(): void {
-    this.flights = this.flightsService.list();
-    this.dataSource.data = this.flightsService.list();
+  async ngOnInit():Promise<void> {
+    this.flights =await  this.flightsService.list();
+    this.dataSource.data = await this.flightsService.list();
+    this.loading=false;
   }
 
   applyFilter(event: Event): void {

@@ -1,5 +1,10 @@
+<div *ngIf="loading" class="loading-container">
+  <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  <p>Loading flight...</p>
+</div>
 <div class="edit-flight-container" *ngIf="flight">
   <h1>Edit Flight</h1>
+
 
   <form #editFlightForm="ngForm" (ngSubmit)="saveChanges(editFlightForm)" class="edit-flight-form">
     
@@ -75,7 +80,7 @@
 </div>
 
 
-<div *ngIf="!flight">
+<div *ngIf="!flight&&!loading">
   <h2>Flight not found!</h2>
   <p>The flight you are trying to edit does not exist.</p>
 </div>

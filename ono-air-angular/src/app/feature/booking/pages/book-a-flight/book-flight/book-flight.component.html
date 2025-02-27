@@ -1,6 +1,9 @@
+<div *ngIf="loading" class="loading-container">
+  <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  <p>Loading flight...</p>
+</div>
 <div class="flight-details" *ngIf="flight">
   <h1>Book a Flight</h1>
-  
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ flight.origin }} → {{ flight.destination }}</mat-card-title>

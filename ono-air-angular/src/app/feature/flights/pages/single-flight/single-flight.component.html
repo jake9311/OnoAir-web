@@ -1,4 +1,8 @@
-<div *ngIf="!flight" class="error-message">
+<div *ngIf="loading" class="loading-container">
+  <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  <p>Loading flights...</p>
+</div>
+<div *ngIf="!flight&&!loading" class="error-message">
   <p>
     Flight number {{ flightNumber }} does not exist. Please check the flight
     number and try again.

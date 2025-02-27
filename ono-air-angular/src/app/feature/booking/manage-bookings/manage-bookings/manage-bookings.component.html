@@ -1,7 +1,10 @@
 <div class="my-bookings-page">
     <h1>My Bookings</h1>
   
-   
+    <div *ngIf="loading" class="loading-container">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+      <p>Loading bookings...</p>
+    </div>
     <div class="section">
       <h2>Upcoming Bookings</h2>
       <div class="booking-card" *ngFor="let booking of newBookings">

@@ -4,7 +4,10 @@
 
 <div class="search-container">
   <h1>✈️ Search a Flight ✈️</h1>
-  
+  <div *ngIf="loading" class="loading-container">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    <p>Loading flights...</p>
+  </div>
   <div class="search-controls">
       <mat-form-field appearance="outline" class="search-bar">
           <mat-label>Search a Flight</mat-label>

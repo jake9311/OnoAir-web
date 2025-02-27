@@ -14,10 +14,12 @@ import { FlightsService } from '../../../flights/flights.service';
 import {MatDialogModule,MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from '../../../../shared/dialog/dialog/dialog.component';
 import { Observable } from 'rxjs';
+import { Flight } from '../../../flights/flight-model/flight-model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-manage-destinations',
-  imports: [MatInputModule,MatFormFieldModule,MatTableModule, MatIcon,RouterModule,CommonModule,MatDialogModule],
+  imports: [MatInputModule,MatFormFieldModule,MatTableModule, MatIcon,RouterModule,CommonModule,MatDialogModule,MatProgressSpinnerModule],
   templateUrl: './manage-destinations.component.html',
   styleUrl: './manage-destinations.component.css'
 })
@@ -25,7 +27,9 @@ export class ManageDestinationsComponent implements OnInit {
   destinations : Destination[]=[];
    dataSource = new MatTableDataSource();
    displayedColumns: string[] = ['name', 'airportName', 'destinationCode', 'airportWebsite','airportImg','status','actions'];
-  constructor(
+   loading=true; 
+
+   constructor(
     private destinationsService: DestinationsService,
     private router: Router,
     private flightsService: FlightsService,
@@ -34,11 +38,14 @@ export class ManageDestinationsComponent implements OnInit {
   ){}
   ngOnInit(): void {
     this.refreshTable();
+   
   }
 refreshTable(): void {
-  this.destinations = this.destinationsService.list();
-  this.dataSource.data = this.destinationsService.list();
+this.destinationsService.list().then(destinations => this.destinations = destinations);
+this.destinationsService.list().then(destinations=> this.dataSource.data = destinations);
+this.loading=false
 }
+
   watchDestination(destination: Destination): void {
     this.router.navigate(['destinations', destination.destinationCode]);
   }
@@ -48,9 +55,25 @@ refreshTable(): void {
       this.refreshTable();
   }
   
+
+
   editDestination(destination: Destination): void {
+    if (!destination) {
+      console.error('editDestination: Destination object is undefined!', destination);
+      return;
+    }
+  
+    if (!destination.destinationCode) {
+      console.error('editDestination: destinationCode is missing!', destination);
+      return;
+    }
+  
+    console.log('Navigating to edit-destination:', destination.destinationCode);
     this.router.navigate(['edit-destination', destination.destinationCode]);
   }
+  
+
+
 addDestination(): void {
   this.router.navigate(['add-destination']);
 }
@@ -62,48 +85,41 @@ confirmDeleteDestination(destination: Destination): void {
   }
 }
 
-// toggleDestinationStatus(destination: Destination): void {
-//   const confirmationMessage =destination.status === objectStatus.Active 
-//   ? 'Are you sure you want to deactivate this destination?' : 'Are you sure you want to activate this destination?';
-//   const confirmation = window.confirm(confirmationMessage);
-//   if (confirmation) {
-//     if (this.hasActiveFlights(destination.name)) {
-//       alert(`Cannot delete destination ${destination.name} because there are active flights associated with it.`);
-//       return;
-//     }
-//     else{
-//     this.destinationsService.updateDestinationStatus(destination.destinationCode, destination.status === objectStatus.Active ? objectStatus.Inactive : objectStatus.Active);
-//     this.refreshTable();
-//   }
-// }}
 
-toggleDestinationStatus(destination: Destination): void {
+
+
+async toggleDestinationStatus(destination: Destination): Promise<void> {
+  if (!destination || !destination.destinationCode) {
+    return;
+  }
+
   const confirmationMessage =
     destination.status === objectStatus.Active
       ? 'Are you sure you want to deactivate this destination?'
       : 'Are you sure you want to activate this destination?';
 
-  this.openDialog('Confirm Action', confirmationMessage).subscribe(result => {
+  this.openDialog('Confirm Action', confirmationMessage).subscribe(async result => {
     if (!result) return;
 
-    if (this.hasActiveFlights(destination.name)) {
-      this.openDialog('Action Denied', `Cannot delete destination ${destination.name} because there are active flights associated with it.`).subscribe();
-      return;
-    }
+    const newStatus = destination.status === objectStatus.Active ? objectStatus.Inactive : objectStatus.Active;
 
-    this.destinationsService.updateDestinationStatus(
-      destination.destinationCode,
-      destination.status === objectStatus.Active ? objectStatus.Inactive : objectStatus.Active
-    );
-    this.refreshTable();
+    try {
+      await this.destinationsService.updateDestinationStatus(destination.destinationCode, newStatus);
+  
+      destination.status = newStatus;
+      
+    } catch (error) {
+      console.error('❌ Error updating status:', error);
+    }
   });
 }
 
 
-private hasActiveFlights(destination: string): boolean {
-  return this.flightsService.list().some(
-    flight => flight.status === 'Active' && (flight.origin === destination || flight.destination === destination)
-  );
+
+private async hasActiveFlights(destination: string): Promise<boolean> {
+const flights=await this.flightsService.list();
+return flights.some((flight:Flight)=>flight.status==='Active' && (flight.origin===destination || flight.destination===destination));
+
 }
 openDialog(title: string, message: string): Observable<boolean> {
   const dialogRef = this.dialog.open(DialogComponent, {
@@ -114,4 +130,13 @@ openDialog(title: string, message: string): Observable<boolean> {
   return dialogRef.afterClosed();
 }
 
+
+
+
 }
+
+
+
+
+
+

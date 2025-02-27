@@ -28,8 +28,8 @@ export class SpecialFlightSearchComponent {
   displayedColumns: string[] =['flightNumber', 'origin', 'destination', 'boardingDate', 'arrivalDate', 'actions'];
 
   constructor(private flightsService: FlightsService, private router: Router) {}
-  ngOnInit() {
-    this.allFlights = this.flightsService.list();
+  async ngOnInit():Promise<void> {
+    this.allFlights = await this.flightsService.list();
   }
   toggleSearchMode() {
     this.searchMode = this.searchMode === 'days' ? 'months' : 'days';

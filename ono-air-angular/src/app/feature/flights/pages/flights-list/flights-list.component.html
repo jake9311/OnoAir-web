@@ -4,6 +4,10 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="search" />
   </mat-form-field>
 </div>
+<div *ngIf="loading" class="loading-container">
+  <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  <p>Loading flights...</p>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="flightNumber">
     <th mat-header-cell *matHeaderCellDef>flight No.</th>

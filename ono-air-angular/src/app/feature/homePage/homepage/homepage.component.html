@@ -2,7 +2,11 @@
 <div class="homepage">
     <h1>Last minute flights</h1>
 
-
+    <div *ngIf="loading" class="loading-container">
+        <mat-progress-spinner color="accent" mode="indeterminate"></mat-progress-spinner>
+        <p>Loading flights...</p>
+      </div>
+    
     <mat-card class="flight-card" appearance="outlined">
 
         <div class="flights" *ngIf="lastMinuteFlights.length>0;else noFlights">

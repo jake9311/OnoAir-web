@@ -12,5 +12,6 @@ export class MyBooking {
         public passengers: { name: string; passport: string }[],
         public status: objectStatus,
         
+        
     ) { }
 }

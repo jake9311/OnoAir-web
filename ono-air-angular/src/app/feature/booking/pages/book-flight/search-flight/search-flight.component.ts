@@ -8,10 +8,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search-flight',
-  imports: [MatTableModule,MatFormFieldModule, MatInputModule,MatIconModule],
+  imports: [MatTableModule,MatFormFieldModule, MatInputModule,MatIconModule,MatProgressSpinnerModule,CommonModule],
   templateUrl: './search-flight.component.html',
   styleUrl: './search-flight.component.css'
 })
@@ -20,13 +22,15 @@ export class SearchFlightComponent implements OnInit {
   flights : Flight[]=[];
    dataSource = new MatTableDataSource();
    displayedColumns: string[] = ['flightNumber', 'origin', 'destination', 'boardingDate', 'actions'];
+   loading=true;
   constructor(
     private flightsService: FlightsService,
     private router: Router
   ){}
-  ngOnInit(): void {
-    this.flights = this.flightsService.list();
-    this.dataSource.data = this.flightsService.list();
+  async ngOnInit(): Promise<void> {
+    this.flights =await this.flightsService.list();
+    this.dataSource.data =await this.flightsService.list();
+    this.loading=false
   }
 
   applyFilter(event: Event): void {

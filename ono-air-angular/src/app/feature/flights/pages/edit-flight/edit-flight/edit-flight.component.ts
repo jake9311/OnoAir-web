@@ -20,18 +20,21 @@ import { objectStatus } from '../../../../../shared/object-status/object-status.
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from '../../../../../shared/dialog/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Timestamp } from 'firebase/firestore';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-edit-flight',
   imports: [RouterModule, MatTableModule, CommonModule, MatFormFieldModule, FormsModule,MatSelectModule,MatRadioModule,MatTableModule,MatInputModule
-    ,MatDatepickerModule,MatNativeDateModule,MatButtonModule,MatButtonModule,MatDialogModule],
+    ,MatDatepickerModule,MatNativeDateModule,MatButtonModule,MatButtonModule,MatDialogModule,MatProgressSpinnerModule],
   templateUrl: './edit-flight.component.html',
   styleUrl: './edit-flight.component.css'
 })
 export class EditFlightComponent implements OnInit {
   flight: Flight | undefined;
   flightStatuses = Object.values(objectStatus);
+  loading=true;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,33 +43,53 @@ export class EditFlightComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  ngOnInit() {
+  async ngOnInit():Promise<void> {
     const flightNumber = this.route.snapshot.paramMap.get('flightNumber');
     if (flightNumber) {
-      this.flight = this.flightsService.get(flightNumber);
+      this.flight =await this.flightsService.get(flightNumber);
+      this.loading=false;
     }
   }
 
-  saveChanges(form: NgForm): void {
+
+  async saveChanges(form: NgForm): Promise<void> {
     if (form.invalid || !this.validateDates()) {
       alert('Please fix the errors before saving.');
       return;
     }
-
+  
     if (this.flight) {
-      this.flight.boardingDate = this.combineDateAndTime(this.flight.boardingDate, this.flight.boardingTime);
-      this.flight.arrivalDate = this.combineDateAndTime(this.flight.arrivalDate, this.flight.arrivalTime);
-      console.log(this.flight)
-      this.flightsService.updateFlight(this.flight);
+      // בדיקה אם boardingDate הוא Timestamp => המרה ל-Date
+      if (this.flight.boardingDate instanceof Timestamp) {
+        this.flight.boardingDate = this.flight.boardingDate.toDate();
+      }
+      // כנ"ל arrivalDate
+      if (this.flight.arrivalDate instanceof Timestamp) {
+        this.flight.arrivalDate = this.flight.arrivalDate.toDate();
+      }
+    
+      // עכשיו בטוח שניהם Date
+      this.flight.boardingDate = this.combineDateAndTime(
+        this.flight.boardingDate, 
+        this.flight.boardingTime
+      );
+      this.flight.arrivalDate = this.combineDateAndTime(
+        this.flight.arrivalDate, 
+        this.flight.arrivalTime
+      );
+    
+      await this.flightsService.updateFlight(this.flight);
       this.router.navigate(['/manage-flights']);
     }
-  }
+  }    
+  
 
   validateDates(): boolean {
     if (!this.flight?.boardingDate || !this.flight?.arrivalDate) return false;
 
-    const boardingDate = new Date(this.flight.boardingDate);
-    const arrivalDate = new Date(this.flight.arrivalDate);
+    const arrivalDate = this.flight.arrivalDate instanceof Timestamp ? this.flight.arrivalDate.toDate() : this.flight.arrivalDate;
+    const boardingDate = this.flight.boardingDate instanceof Timestamp ? this.flight.boardingDate.toDate() : this.flight.boardingDate;
+    // const arrivalDate = new Date(this.flight.arrivalDate);
 
    
     boardingDate.setHours(0, 0, 0, 0);
@@ -99,14 +122,13 @@ export class EditFlightComponent implements OnInit {
     return true;
   }
 
-
-  combineDateAndTime(date: Date, time: string): Date {
-    if (!date || !time) return date;
-    const [hours, minutes] = time.split(':').map(Number);
-    const newDate = new Date(date);
-    newDate.setHours(hours, minutes, 0, 0);
-    return newDate;
+combineDateAndTime(date: Date, time: string): Date {
+  const [hours, minutes] = time.split(':').map(Number);
+  const newDate = new Date(date);
+  newDate.setHours(hours, minutes, 0, 0);
+  return newDate;
 }
+
 
 openDialog(title: string, message: string): Observable<boolean> {
   const dialogRef = this.dialog.open(DialogComponent, {

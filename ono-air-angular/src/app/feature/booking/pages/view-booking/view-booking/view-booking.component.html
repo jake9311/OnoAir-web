@@ -1,5 +1,11 @@
 
-<div *ngIf="!booking" class="error-message">
+
+<div *ngIf="loading" class="loading-spinner">
+  <mat-progress-spinner color="accent" mode="indeterminate"></mat-progress-spinner>
+  <p>Loading booking details...</p>
+</div>
+
+<div *ngIf="!booking&&!loading" class="error-message">
   <p>Booking with this Id number: {{ bookingId }} , does not exist. Please check the Booking Id and try again.</p>
 </div>
 
@@ -7,9 +13,10 @@
 
 <div *ngIf="booking" class="view-booking">
   <h1>Booking Details</h1>
+  
   <mat-card class="booking-card" appearance="outlined">
-  <div class="booking-card">
-    <div *ngif="booking" class="booking-card"></div>
+
+    <div *ngIf="booking" class="booking-card">
     <img mat-card-image [src]="imgUrl" alt="Destination image" class="booking-image">
     <mat-card-content>
       <div class="booking-details">
@@ -27,6 +34,7 @@
   </mat-card-content>
   </div>
 </mat-card>
+
 
 
 

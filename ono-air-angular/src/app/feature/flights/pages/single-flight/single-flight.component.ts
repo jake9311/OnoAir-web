@@ -8,12 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-single-flight',
-  imports: [MatTableModule,MatCardModule,CommonModule],
+  imports: [MatTableModule,MatCardModule,CommonModule,MatProgressSpinnerModule],
   templateUrl: './single-flight.component.html',
   styleUrl: './single-flight.component.css'
 })
@@ -21,22 +21,21 @@ export class SingleFlightComponent implements OnInit {
   @Input() flightNumber: string | undefined;
   flight: Flight | undefined;
   flightNotFound = false;
+  loading=true;
   constructor(private flightsService: FlightsService, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit() {
-  const flightNumber=this.route.snapshot.paramMap.get('flightNumber')?.trim();
-  if (flightNumber){
-    const flight = this.flightsService.get(flightNumber);
-    if (flight){
-      this.flight = flight;
-  }
-  else{
-    this.flightNotFound = true;
-  }
-  }
-  else{
-    this.flightNotFound = true;
-  }
+
+  async ngOnInit() {
+    const flightNumber = this.route.snapshot.paramMap.get('flightNumber');
+    if (flightNumber) {
+      this.flight = await this.flightsService.get(flightNumber);
+      this.loading=false;
+      if (!this.flight) {
+        this.flightNotFound = true;
+      }
+    } else {
+      this.flightNotFound = true;
+    }
   }
   bookFlight(flight: Flight): void {
     this.router.navigate(['book-a-flight', flight.flightNumber]);

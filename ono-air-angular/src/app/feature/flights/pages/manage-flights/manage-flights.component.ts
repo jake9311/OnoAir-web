@@ -14,11 +14,14 @@ import { BookingService } from '../../../booking/booking.service';
 import {MatDialogModule,MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from '../../../../shared/dialog/dialog/dialog.component';
 import { Observable } from 'rxjs';
+import { Timestamp } from 'firebase/firestore';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 @Component({
   selector: 'app-manage-flights',
-  imports: [MatTableModule,MatFormFieldModule, MatInputModule,MatIcon,RouterModule,CommonModule,MatDialogModule],
+  imports: [MatTableModule,MatFormFieldModule, MatInputModule,MatIcon,RouterModule,CommonModule,MatDialogModule,MatProgressSpinnerModule],
   templateUrl: './manage-flights.component.html',
   styleUrl: './manage-flights.component.css'
 })
@@ -26,7 +29,7 @@ export class ManageFlightsComponent implements OnInit {
   flights : Flight[]=[];
    dataSource = new MatTableDataSource();
    displayedColumns: string[] = ['flightNumber', 'origin', 'destination', 'boardingDate','arrivalDate', 'numOfSeats','status','actions'];
-
+  loading=true;
   
    constructor(
     private flightsService: FlightsService,
@@ -34,16 +37,17 @@ export class ManageFlightsComponent implements OnInit {
     private bookingService: BookingService,
     private dialog: MatDialog
   ){}
-  ngOnInit(): void {
-    try {
-      this.refreshTable();
-    } catch (error) {
-      console.error("Error loading flights:", error);
-    }
+
+  async ngOnInit(): Promise<void> {
+    this.refreshTable();
   }
-  refreshTable():void{
-    this.flights=this.flightsService.list();
-    this.dataSource.data=this.flightsService.list();
+
+  async refreshTable(): Promise<void> {
+    this.flights = await this.flightsService.list();
+    this.dataSource.data = this.flights;
+    this.loading=false;
+    // await this.flightsService.deleteAllFlights();
+    // await this.flightsService.uploadFlightsToFirestore();
   }
 
   watchFlight(flight: Flight): void {
@@ -75,34 +79,40 @@ toggleFlightStatus(flight: Flight): void {
       ? 'Are you sure you want to deactivate this flight?'
       : 'Are you sure you want to activate this flight?';
 
-  this.openDialog('Confirm Action', confirmationMessage).subscribe(result => {
+  this.openDialog('Confirm Action', confirmationMessage).subscribe(async (result) => {
     if (!result) return;
 
-    if (flight.status === objectStatus.Active && this.hasActiveBookings(flight.flightNumber)) {
-      this.openDialog('Error', `Cannot cancel flight ${flight.flightNumber} because there are active bookings.`);
-      return;
-    }
 
-    if (flight.boardingDate < new Date(new Date().toISOString().split('T')[0])) {
+    const hasActiveBookings = await this.hasActiveBookings(flight.flightNumber);
+      if (flight.status === objectStatus.Active && hasActiveBookings) {
+        this.openDialog('Error', `Cannot cancel flight ${flight.flightNumber} because there are active bookings.`);
+      return;
+      }
+    });
+
+
+      if ((flight.boardingDate instanceof Timestamp ? flight.boardingDate.toDate() : flight.boardingDate) < new Date()) {
+
       this.openDialog('Error', `Cannot cancel flight ${flight.flightNumber} because the flight has already started.`);
       return;
-    }
 
-    // עדכון הסטטוס של הטיסה
     this.flightsService.updateFlightStatus(
       flight.flightNumber,
       flight.status === objectStatus.Active ? objectStatus.Inactive : objectStatus.Active
-    );
-
-    this.refreshTable();
-  });
+    ).then(() => {
+      this.refreshTable();
+    });
+  };
 }
 
-private hasActiveBookings(flightNumber: string): boolean {
-  return this.bookingService.list().some(
-    booking => booking.flightNumber === flightNumber
-  );
+
+
+
+private async hasActiveBookings(flightNumber: string): Promise<boolean> {
+  const bookings = await this.bookingService.list();
+  return bookings.some(booking => booking.flightNumber === flightNumber);
 }
+
 openDialog(title: string, message: string): Observable<boolean> {
   const dialogRef = this.dialog.open(DialogComponent, {
     width: '400px',

@@ -29,8 +29,9 @@ export class AddDestinationFormComponent {
 constructor(
   private destinationsService: DestinationsService, private router: Router){}
 
-  onSubmit(): void {
-    this.destinationsService.addDestination(this.newDestination);
+ 
+  async onSubmit(): Promise<void> {
+    await this.destinationsService.addDestination(this.newDestination);
     this.router.navigate(['/manage-destinations']);
   }
 }
